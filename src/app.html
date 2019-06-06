@@ -1,0 +1,34 @@
+<template>
+  <h1>True Token Value!</h1>
+  <!--TODO: set onload, and remove button-->
+  <button click.delegate = "getData()">GET</button>
+
+  <!-- TODO: Implement auralia-table (properly)-->
+    <table class="table table-striped" aurelia-table="data.bind: coin; display-data.bind: coindata">
+        <thead>
+        <tr>
+            <th>Symbol ${coindata[0].symbol}</th>
+            <th>Rank</th>
+            <th>Price</th>
+            <th>Marketcap</th>
+            <th>Adjusted Price (Circulating)</th>
+            <th>Token price with BTC Marketcap</th>
+        </tr>
+        </thead>
+        <tbody>
+          
+        <tr repeat.for="coin of coindata">
+            <td>${coin.symbol}</td>
+            <td>${coin.market_data.market_cap_rank}</td>
+            <td>${coin.market_data.current_price.aud}</td>
+            <td>${coin.market_data.market_cap.aud}</td>
+            <td>${coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply}</td>
+            <td>${(coindata[0].market_data.current_price.aud / (coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply))*coin.market_data.current_price.aud}</td>
+            
+        </tr>
+        </tbody>
+    </table>
+
+
+</template>
+
