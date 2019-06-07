@@ -22,8 +22,8 @@
             <td>${coin.market_data.market_cap_rank}</td>
             <td>${coin.market_data.current_price.aud}</td>
             <td>${coin.market_data.market_cap.aud}</td>
-            <td>${coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply}</td>
-            <td>${(coindata[0].market_data.current_price.aud / (coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply))*coin.market_data.current_price.aud}</td>
+            <td>${(coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply).toFixed(2)}</td>
+            <td>${((coindata[0].market_data.current_price.aud / (coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply))*coin.market_data.current_price.aud).toFixed(2)}</td>
             
         </tr>
         </tbody>
