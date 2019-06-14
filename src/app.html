@@ -6,13 +6,13 @@
     <a class="navbar-brand" href="/">True Token Value</a>
   </nav>
 
-  <!-- TODO: Implement auralia-table (properly)-->
   <div id="content-body" style="padding-top: 56px; overflow: auto;">
     <!-- ToDo: implement routing and <router-content> goes here -->
     <table class="table table-striped" aurelia-table="data.bind: coin; display-data.bind: coindata">
       <thead>
         <tr>
-            <th class="w-10">Symbol ${coindata[0].symbol}</th>
+            <!-- TODO: Add tooltip for "Adjusted price" and "True Token Price" -->
+            <th class="w-10">Symbol</th>
             <th class="w-10">Rank</th>
             <th class="w-10">Price</th>
             <th class="w-10">Marketcap</th>
@@ -26,11 +26,11 @@
         </tr>
         <tr repeat.for="coin of coindata">
             <td>${coin.symbol}</td>
-            <td>${coin.market_data.market_cap_rank}</td>
-            <td>${coin.market_data.current_price.aud}</td>
-            <td>${coin.market_data.market_cap.aud}</td>
-            <td>${(coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply).toFixed(2)}</td>
-            <td>${((coindata[0].market_data.current_price.aud / (coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply))*coin.market_data.current_price.aud).toFixed(2)}</td>
+            <td>${(coin.market_data.market_cap_rank)}</td>
+            <td>${"$"+(coin.market_data.current_price.aud).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 4})}</td>
+            <td>${"$"+(coin.market_data.market_cap.aud).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</td>
+            <td>${"$"+((coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2,}))}</td>
+            <td>${"$"+((coindata[0].market_data.current_price.aud / (coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply))*coin.market_data.current_price.aud).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 3})}</td>
         </tr>
       </tbody>
     </table>
