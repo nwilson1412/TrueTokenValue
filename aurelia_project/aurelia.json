@@ -18,7 +18,21 @@
       "server": "dev",
       "extractCss": "prod",
       "coverage": false
-    }
+    },
+    "bundles": [
+      {
+        "name": "bootstrap",
+        "path": "../node_modules/bootstrap/dist",
+        "main": "js/bootstrap.min",
+        "deps": [
+            "jquery"
+        ],
+        "exports": "$",
+        "resources": [
+            "scss/bootstrap.scss"
+        ]
+      }
+    ]
   },
   "platform": {
     "hmr": false,

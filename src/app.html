@@ -1,22 +1,29 @@
 <template>
-  <h1>True Token Value!</h1>
-  <!--TODO: set onload, and remove button-->
-  <button click.delegate = "getData()">GET</button>
+  <!-- ToDo: figure out webpack module loading so don't need to use boostrap CDN import in index.ejs -->
+  <!-- <require from="bootstrap/css/bootstrap.scss"></require> -->
+
+  <nav class="navbar navbar-dark fixed-top navbar-expand-lg bg-dark">
+    <a class="navbar-brand" href="/">True Token Value</a>
+  </nav>
 
   <!-- TODO: Implement auralia-table (properly)-->
+  <div id="content-body" style="padding-top: 56px; overflow: auto;">
+    <!-- ToDo: implement routing and <router-content> goes here -->
     <table class="table table-striped" aurelia-table="data.bind: coin; display-data.bind: coindata">
-        <thead>
+      <thead>
         <tr>
-            <th>Symbol ${coindata[0].symbol}</th>
-            <th>Rank</th>
-            <th>Price</th>
-            <th>Marketcap</th>
-            <th>Adjusted Price (Circulating)</th>
-            <th>Token price with BTC Marketcap</th>
+            <th class="w-10">Symbol ${coindata[0].symbol}</th>
+            <th class="w-10">Rank</th>
+            <th class="w-10">Price</th>
+            <th class="w-10">Marketcap</th>
+            <th class="w-30">Adjusted Price (Circulating)</th>
+            <th class="w-30">Token price with BTC Marketcap</th>
         </tr>
-        </thead>
-        <tbody>
-          
+      </thead>
+      <tbody>
+        <tr if.bind="loadingCoinData">
+          <td colspan="6" class="alert alert-warning">Loading...</td>
+        </tr>
         <tr repeat.for="coin of coindata">
             <td>${coin.symbol}</td>
             <td>${coin.market_data.market_cap_rank}</td>
@@ -24,11 +31,10 @@
             <td>${coin.market_data.market_cap.aud}</td>
             <td>${(coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply).toFixed(2)}</td>
             <td>${((coindata[0].market_data.current_price.aud / (coin.market_data.market_cap.aud / coindata[0].market_data.circulating_supply))*coin.market_data.current_price.aud).toFixed(2)}</td>
-            
         </tr>
-        </tbody>
+      </tbody>
     </table>
-
+  </div>
 
 </template>
 

@@ -3,20 +3,25 @@ import {HttpClient} from 'aurelia-http-client';
 export class App {
 
   public coindata: any;
-
+  loadingCoinData = false;
   client = new HttpClient();
 
-  getData(){
-    //console.log("testing")
-    
-    this.client.get('https://api.coingecko.com/api/v3/coins/')
-      .then(data => {
-        
-        this.coindata = JSON.parse(data.response);
+  attached() {
+    this.getData();
+  }
 
-        //console.log(this.coindata)
-      })
-      
+  async getData(){
+    this.loadingCoinData = true;
+    try {
+      const coinData = await this.client.get('https://api.coingecko.com/api/v3/coins/');
+      if (coinData && coinData.isSuccess) {
+        this.coindata = coinData.content;
+      }
+    } catch (error) {
+      console.error(`app.getData: ${error}`);
+    } finally {
+      this.loadingCoinData = false;
+    }
   }
   
 }
