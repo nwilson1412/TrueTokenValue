@@ -3,8 +3,11 @@ import {HttpClient} from 'aurelia-http-client';
 export class App {
 
   public coindata: any;
+  public currencyType = "usd";
   loadingCoinData = false;
   client = new HttpClient();
+
+  
 
   attached() {
     this.getData();
