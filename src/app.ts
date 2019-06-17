@@ -1,13 +1,21 @@
 
 import {HttpClient} from 'aurelia-http-client';
+import { exportDefaultSpecifier } from '@babel/types';
 export class App {
 
+  public products = [
+    //USD is already set. It is the default
+    { id: '$', name: 'aud' },
+    { id: 'Ξ', name: 'eth' },
+    { id: '₿', name: 'btc' },
+    { id: '€', name: 'eur' },
+  ];
+
+  public currencySymbol: any;
   public coindata: any;
-  public currencyType = "usd";
+
   loadingCoinData = false;
   client = new HttpClient();
-
-  
 
   attached() {
     this.getData();
@@ -26,6 +34,5 @@ export class App {
       this.loadingCoinData = false;
     }
   }
-  
 }
 

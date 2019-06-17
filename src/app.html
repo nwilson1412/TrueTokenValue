@@ -4,20 +4,17 @@
 
   <nav class="navbar navbar-dark fixed-top navbar-expand-lg bg-dark">
     <a class="navbar-brand" href="/">True Token Value</a>
-    <div class="dropdown">
-        <select value.bind="currencyType">
-            <option value="usd">USD</option>
-            <option value="eur">EUR</option>
-            <option value="aud">AUD</option>
-            <option value="eth">ETH</option>
-            <option value="btc">BTC</option>
-        </select>        
-    </div>  
+      <select value.bind="currencySymbol">
+        <option model.bind="{ id: '$', name: 'usd' }">USD</option>
+        <option repeat.for="product of products" model.bind="product">
+          ${product.name.toUpperCase()}
+        </option>
+      </select>
   </nav>
 
   <div id="content-body" style="padding-top: 56px; overflow: auto;">
     <!-- ToDo: implement routing and <router-content> goes here -->
-
+  
     <table class="table table-striped">
     
       <thead>
@@ -38,10 +35,10 @@
         <tr repeat.for="coin of coindata">
             <td>${(coin.symbol).toUpperCase()}</td>
             <td>${(coin.market_data.market_cap_rank)}</td>
-            <td>${"$"+(coin.market_data.current_price[currencyType]).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 4})}</td>
-            <td>${"$"+(coin.market_data.market_cap[currencyType]).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</td>
-            <td>${"$"+((coin.market_data.market_cap[currencyType] / coindata[0].market_data.circulating_supply).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2,}))}</td>
-            <td>${"$"+((coindata[0].market_data.current_price[currencyType] / (coin.market_data.market_cap[currencyType] / coindata[0].market_data.circulating_supply))*coin.market_data.current_price[currencyType]).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 3})}</td>
+            <td>${currencySymbol.id+(coin.market_data.current_price[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 4})}</td>
+            <td>${currencySymbol.id+(coin.market_data.market_cap[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</td>
+            <td>${currencySymbol.id+((coin.market_data.market_cap[currencySymbol.name] / coindata[0].market_data.circulating_supply).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2,}))}</td>
+            <td>${currencySymbol.id+((coindata[0].market_data.current_price[currencySymbol.name] / (coin.market_data.market_cap[currencySymbol.name] / coindata[0].market_data.circulating_supply))*coin.market_data.current_price[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2})}</td>
         </tr>
 
       </tbody>
