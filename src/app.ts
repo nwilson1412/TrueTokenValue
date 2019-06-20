@@ -27,6 +27,7 @@ export class App {
       const coinData = await this.client.get('https://api.coingecko.com/api/v3/coins/');
       if (coinData && coinData.isSuccess) {
         this.coindata = coinData.content;
+        console.log(this.coindata[0])
       }
     } catch (error) {
       console.error(`app.getData: ${error}`);

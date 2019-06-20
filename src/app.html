@@ -20,12 +20,12 @@
       <thead>
         <tr>
             <!-- TODO: Add tooltip for "Adjusted price" and "True Token Price" -->
-            <th class="w-15">Symbol</th>
-            <th class="w-15">Rank</th>
-            <th class="w-15">Price</th>
-            <th class="w-15">Marketcap</th>
-            <th class="w-20">Adjusted Price (Token Marketcap/BTC Circulating Supply)</th>
-            <th class="w-20">Token price if it had Bitcoin's marketcap</th>
+            <th class="w-5">Rank</th>
+            <th class="w-10">Symbol</th>
+            <th class="w-10">Price</th>
+            <th class="w-10">Adjusted Price</th>
+            <th class="w-30">Token price with Bitcoin's marketcap</th>
+            <th class="w-30">Marketcap</th>
         </tr>
       </thead>
       <tbody>
@@ -33,13 +33,13 @@
           <td colspan="6" class="alert alert-warning">Loading...</td>
         </tr>
         <tr repeat.for="coin of coindata">
-            <td>${(coin.symbol).toUpperCase()}</td>
             <td>${(coin.market_data.market_cap_rank)}</td>
+            <td>${(coin.symbol).toUpperCase()}</td>
             <td>${currencySymbol.id+(coin.market_data.current_price[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 4})}</td>
-            <td>${currencySymbol.id+(coin.market_data.market_cap[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</td>
             <td>${currencySymbol.id+((coin.market_data.market_cap[currencySymbol.name] / coindata[0].market_data.circulating_supply).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2,}))}</td>
-            <td>${currencySymbol.id+((coindata[0].market_data.current_price[currencySymbol.name] / (coin.market_data.market_cap[currencySymbol.name] / coindata[0].market_data.circulating_supply))*coin.market_data.current_price[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2})}</td>
-        </tr>
+            <td>${currencySymbol.id+((coindata[0].market_data.current_price[currencySymbol.name] / (coin.market_data.market_cap[currencySymbol.name] / coindata[0].market_data.circulating_supply))*coin.market_data.current_price[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2})+"  ("+((coindata[0].market_data.market_cap[currencySymbol.name])/(coin.market_data.market_cap[currencySymbol.name])).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2,})+"x)"}</td>
+            <td>${currencySymbol.id+(coin.market_data.market_cap[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</td>
+          </tr>
 
       </tbody>
     </table>
