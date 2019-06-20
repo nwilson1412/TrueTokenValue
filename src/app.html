@@ -37,7 +37,8 @@
             <td>${(coin.symbol).toUpperCase()}</td>
             <td>${currencySymbol.id+(coin.market_data.current_price[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 4})}</td>
             <td>${currencySymbol.id+((coin.market_data.market_cap[currencySymbol.name] / coindata[0].market_data.circulating_supply).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2,}))}</td>
-            <td>${currencySymbol.id+((coindata[0].market_data.current_price[currencySymbol.name] / (coin.market_data.market_cap[currencySymbol.name] / coindata[0].market_data.circulating_supply))*coin.market_data.current_price[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2})+"  ("+((coindata[0].market_data.market_cap[currencySymbol.name])/(coin.market_data.market_cap[currencySymbol.name])).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2,})+"x)"}</td>
+            <td>${currencySymbol.id+((coindata[0].market_data.current_price[currencySymbol.name] / (coin.market_data.market_cap[currencySymbol.name] / coindata[0].market_data.circulating_supply))*coin.market_data.current_price[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 2,maximumFractionDigits: 2})
+                +" (" + (((coindata[0].market_data.market_cap[currencySymbol.name]-coin.market_data.market_cap[currencySymbol.name])/coin.market_data.market_cap[currencySymbol.name])*100).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})+"%)"}</td>
             <td>${currencySymbol.id+(coin.market_data.market_cap[currencySymbol.name]).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 0})}</td>
           </tr>
 
